@@ -1268,7 +1268,7 @@ export default function App() {
             </div>
             <div><h4>Shop</h4><a href="#shop">Audio</a><a href="#shop">Wearables</a><a href="#shop">Fashion</a></div>
             <div><h4>Help</h4><a href="#contact">Shipping</a><a href="#contact">Returns</a><a href="#contact">Track order</a></div>
-            <div><h4>Company</h4><a href="#about">About us</a><a href="#contact">Careers</a><a href="#contact">hello@everstyle.store</a><a href="#admin">Admin</a></div>
+            <div><h4>Company</h4><a href="#about">About us</a><a href="#contact">Careers</a><a href="#contact">hello@everstyle.store</a></div>
           </div>
           <div className="copy"><span>© 2026 Ever Style. All rights reserved.</span><span>Privacy · Terms</span></div>
         </div>
