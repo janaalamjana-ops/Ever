@@ -282,6 +282,15 @@ function Dashboard({ data, go }) {
 /* ============================================================
    ORDERS
 ============================================================ */
+function OrderThumb({ it, products }) {
+  const [step, setStep] = useState(0);
+  const p = products.find((x) => String(x.id) === String(it.id)) || products.find((x) => x.name === it.name);
+  const key = it.img || p?.img;
+  const list = [p?.images?.[0], it.image, key ? `/products/${key}.jpg` : "", key ? `https://loremflickr.com/120/120/${key}?lock=${it.id || 1}` : ""].filter(Boolean);
+  const src = list[step];
+  return src ? <img className="ad-thumb" src={src} alt="" onError={() => setStep((s) => s + 1)} /> : <span className="ad-thumb">◇</span>;
+}
+
 function Orders({ data, update }) {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
@@ -321,7 +330,7 @@ function Orders({ data, update }) {
             <section className="ad-inner-card">
               <h3>Order items</h3>
               {(sel.items || []).length ? sel.items.map((it, i) => (
-                <div className="ad-line" key={i}><div><b>{it.name}</b><span>Qty: {it.qty || 1}</span></div><b>{money(Number(it.price || 0) * Number(it.qty || 1))}</b></div>
+                <div className="ad-line ad-item-line" key={i}><OrderThumb it={it} products={data.products} /><div><b>{it.name}</b><span>Qty: {it.qty || 1}</span></div><b>{money(Number(it.price || 0) * Number(it.qty || 1))}</b></div>
               )) : <p className="ad-muted">No item details available.</p>}
               {sel.coupon && <div className="ad-line"><div><b>Coupon</b><span>{sel.coupon}</span></div><b>−{money(sel.discount || 0)}</b></div>}
             </section>
@@ -1227,6 +1236,8 @@ textarea.ad-input{resize:vertical}
 .ad-line b{color:#314038;font-size:13px}
 .ad-line span{color:#929B95;font-size:11px}
 .ad-line-right{justify-items:end}
+.ad-item-line>div{flex:1;min-width:0}
+.ad-thumb{width:54px;height:54px;border-radius:10px;object-fit:cover;background:var(--cream);flex:none;display:grid;place-items:center;color:#9A8B65;overflow:hidden}
 .ad-info-row{padding:8px 0;display:grid;gap:3px}
 .ad-info-row span{color:#909A93;font-size:11px}
 .ad-info-row b{color:#35433B;font-size:13px}
