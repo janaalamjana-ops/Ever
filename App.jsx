@@ -605,7 +605,7 @@ function CheckoutPage({ user, cart, onBack, onPlaced }) {
     }
     const oid = "NV-" + Math.random().toString(36).slice(2, 8).toUpperCase();
     setOrder({ id: oid, email: f.email, total, pay });
-    saveOrder({ id: oid, name: `${f.first} ${f.last}`.trim(), phone: f.phone, email: f.email, address: `${f.address}, ${f.city} ${f.zip}, ${f.country}`, items: cart.map((i) => ({ name: i.name, qty: i.qty, price: i.price })), total, pay: pay === "cod" ? "Cash on delivery" : "Card", status: "Pending", coupon: applied ? applied.code : null, discount, ts: new Date().toISOString() });
+    saveOrder({ id: oid, name: `${f.first} ${f.last}`.trim(), phone: f.phone, email: f.email, address: `${f.address}, ${f.city} ${f.zip}, ${f.country}`, items: cart.map((i) => ({ id: i.id, name: i.name, qty: i.qty, price: i.price, img: i.img, image: i.image && !String(i.image).startsWith("data:") ? i.image : "" })), total, pay: pay === "cod" ? "Cash on delivery" : "Card", status: "Pending", coupon: applied ? applied.code : null, discount, ts: new Date().toISOString() });
     onPlaced();
     window.scrollTo(0, 0);
   };
